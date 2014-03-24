@@ -292,12 +292,11 @@
                 next: function() {
                     
                     // call the block level on_trial_finish callback function
-                    if (this.trial_idx != -1) //TODO CONTINUE HERE
-
-                    
-                    if (typeof this.trials[this.trial_idx + 1] != "undefined" && (curr_block != 0 || this.trial_idx > -1)) {
+                    // and call the jsPsych level on_trial_finish callback function
+                    if (this.trial_idx != -1) {
+                        this.on_trial_finish(this.data[this.trial_idx]);
                         opts.on_trial_finish();
-                    };
+                    }
 
                     this.trial_idx = this.trial_idx + 1;
 
@@ -341,7 +340,7 @@
         //
         function flattenData(data_object, append_data) {
 
-            append_data = (typeof append_data === undefined) ? {} : append_data;
+            append_data = (typeof append_data === "undefined") ? {} : append_data;
 
             var trials = [];
 
