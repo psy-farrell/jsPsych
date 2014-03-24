@@ -251,7 +251,15 @@
             for (var i = 0; i < exp_blocks.length; i++) {
                 var trials = jsPsych[opts["experiment_structure"][i]["type"]]["create"].call(null, opts["experiment_structure"][i]);
 
-                exp_blocks[i] = createBlock(trials);
+                // check if there are any block level parameters to 
+                // include in the createBlock function call
+                var block_params = {};
+                
+                if(typeof opts.expertiment_structure[i].on_trial_finish !== "undefined"){
+                    block_params.on_trial_finish = opts.expertiment_structure[i].on_trial_finish;
+                }
+                
+                exp_blocks[i] = createBlock(trials, block_params);
             }
 
             // record the start time
@@ -271,19 +279,22 @@
             }
         }
 
-        function createBlock(trial_list) {
+        function createBlock(trial_list, params) {
             var block = {
                 trial_idx: -1,
 
                 trials: trial_list,
 
                 data: [],
+                
+                on_trial_finish: (typeof params.on_trial_finish !== 'undefined' ? params.on_trial_finish : function(){}),
 
                 next: function() {
+                    
+                    // call the block level on_trial_finish callback function
+                    if (this.trial_idx != -1) //TODO CONTINUE HERE
 
-                    // call on_trial_finish() 
-                    //     if not very first trial
-                    //		and not the last call in this block (no trial due to advance in block)
+                    
                     if (typeof this.trials[this.trial_idx + 1] != "undefined" && (curr_block != 0 || this.trial_idx > -1)) {
                         opts.on_trial_finish();
                     };
