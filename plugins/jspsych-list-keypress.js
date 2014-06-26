@@ -243,7 +243,7 @@
 	                
 	                block.writeData($.extend({}, {
 	                	"trial_type": "list-keypress",
-	                	"trial_index": jsPsych.progress().current_trial_global,
+	                	"trial_index": block.trial_idx,
 	                    "responses": responses,
                         "rt": rt
 	                }, trial.data));
