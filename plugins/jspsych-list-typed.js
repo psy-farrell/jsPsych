@@ -79,7 +79,7 @@
  		plugin.trial = function(display_element, block, trial, part) {
 
 			// allow variables as functions
-			trial = jsPsych.normalizeTrialVariables(trial);
+			trial = jsPsych.pluginAPI.normalizeTrialVariables(trial);
 
 			// To initially run the function:
             

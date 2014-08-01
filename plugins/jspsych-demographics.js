@@ -50,7 +50,7 @@ Example Usage:
             // if any trial variables are functions
             // this evaluates the function and replaces
             // it with the output of the function
-            trial = jsPsych.normalizeTrialVariables(trial);
+            trial = jsPsych.pluginAPI.normalizeTrialVariables(trial);
 
             display_element.html('<br> <br> <form name="demogform" id="thedemogform">  \
   <label for="user">Subject ID:</label><input name="uniqueID" /><br /><br /> \
@@ -95,7 +95,6 @@ Example Usage:
             
             if (msg==""){
                 // everything looks good, let's continue
-                // TODO: save the data
                 block.writeData($.extend({}, {
                     "trial_type": "demographics",
                     "trial_index": block.trial_idx,
