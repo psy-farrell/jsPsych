@@ -90,11 +90,10 @@
 				// list presentation
 
 				var interval_time = trial.stim_time + trial.stim_isi;
-				var stim_pos = 0;
 
-				show_next_stimulus();
+				show_next_stimulus(0);
 
-				function show_next_stimulus() {
+				function show_next_stimulus(stim_pos) {
 
 	            	display_element.html(""); // clear everything
 
@@ -113,30 +112,30 @@
 	            	}
 
 	            	setTimeout(function(){
-	            		stim_pos++;
-	            		if (stim_pos==trial.stims.length){
+	            		
+	            		if (stim_pos==(trial.stims.length-1)){
 	                		if (trial.stim_isi[stim_pos] > 0){
-                                pause_before_recall();
+                                pause_before_recall(stim_pos);
                             } else {
                                 plugin.trial(display_element, block, trial, part + 1);
                             }
 	                	} else if (trial.stim_isi[stim_pos] > 0){
-	                		blank_pause();
+	                		blank_pause(stim_pos);
 	                	} else {
-	                		show_next_stimulus();
+	                		show_next_stimulus(stim_pos+1);
 	                	}
 	                }, trial.stim_time[stim_pos]);
 
 	            }
 
-	            function blank_pause (){
+	            function blank_pause (stim_pos){
 	            	$('#jspsych-stimulus-sequence').css('visibility', 'hidden');
 	            	setTimeout(function() {
-	            		show_next_stimulus();
+	            		show_next_stimulus(stim_pos+1);
 	            	}, trial.stim_isi[stim_pos]);
 	            }
 
-                function pause_before_recall (){
+                function pause_before_recall (stim_pos){
                     $('#jspsych-stimulus-sequence').css('visibility', 'hidden');
                     setTimeout(function() {
                         plugin.trial(display_element, block, trial, part + 1);  

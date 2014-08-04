@@ -83,7 +83,8 @@ Example Usage:
                 msg = msg + "<br>Please enter a valid age";
             }
 
-            var gender = document.forms["demogform"]["gender"].value;
+            var gender = $("input[type='radio'][name='gender']:checked").val();
+
             if (gender != "male" && gender != "female" && gender != "decline") {
                 msg = msg + "<br>Please choose a gender (or select the 'decline' option)";
             }
