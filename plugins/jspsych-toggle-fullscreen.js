@@ -19,7 +19,7 @@
 		plugin.trial = function(display_element, block, trial, part) {
 			
 			// I don't think you need next line, but left it in here to be safe...
-			trial = jsPsych.normalizeTrialVariables(trial);
+			trial = jsPsych.pluginAPI.normalizeTrialVariables(trial);
 
 			display_element.html("");
 			
@@ -72,7 +72,10 @@
 	            setTimeout(function(){block.next()}, 3000);
 	        }
 
-	        display_element.click(mouse_listener);
+	        //display_element.addEventListener('click', mouse_listener, false);
+	        setTimeout(function(){
+	        	display_element.click(mouse_listener);
+	        }, 1000);
 
             // TODO: record whether resizing was successful
    //          var trial_data = {

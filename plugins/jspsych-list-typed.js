@@ -18,6 +18,8 @@
 //                  Defaults to the number of stimuli for each trial
 //      time_limit: Timeout for recall period. Defaults to 1 minute.
 //      terminate_key: Optional parameter indicating keycode of key that can be used to terminate trial
+//      fix_time: A 2-element vector representing the duration of a fixation cross, and blank time
+//                  following the cross. If set to [0, 0], no fixation cross is shown
 //
 //      is_html: must set to true when using HTML strings as the stimuli.
 //      prompt: optional HTML string to prompt for typed recall.
@@ -31,6 +33,7 @@
  		var plugin = {};
 
  		plugin.create = function(params) {
+
  			var trials = new Array(params.stimuli.length);
  			for(var i = 0; i < trials.length; i++)
  			{
@@ -72,6 +75,7 @@
  				trials[i].nResponses = (typeof params.nResponses === 'undefined') ? trials[i].stims.length : params.nResponses;
  				trials[i].timeLimit = (typeof params.timeLimit === 'undefined') ? 60000 : params.time_limit;
  				trials[i].terminate_key = (typeof params.terminate_key === 'undefined') ? 0 : params.terminate_key;
+                trials[i].fix_time = (typeof params.n_responses === 'undefined') ? [500, 500] : params.fix_time;
  			}
  			return trials;
  		};
@@ -91,7 +95,17 @@
 
 				var interval_time = trial.stim_time + trial.stim_isi;
 
-				show_next_stimulus(0);
+				if (trial.fix_time[0]>0){
+                    display_element.html("+");
+                    setTimeout(function(){
+                        display_element.html("");
+                        setTimeout(function(){
+                            show_next_stimulus(0);
+                        }, trial.fix_time[1]);
+                    }, trial.fix_time[0]);
+                } else {
+                    show_next_stimulus(0);
+                }
 
 				function show_next_stimulus(stim_pos) {
 
