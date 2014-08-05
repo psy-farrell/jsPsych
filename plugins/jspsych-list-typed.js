@@ -67,6 +67,14 @@
  					}
  				}
 
+                if (typeof params.prompt ==='undefined'){
+                    trials[i].prompt = '';
+                } else if (params.prompt instanceof Array){
+                    trials[i].prompt = params.prompt[i];
+                } else {
+                    trials[i].prompt = params.prompt;
+                }
+
  				trials[i].prompt = (typeof params.prompt === 'undefined') ? "" : params.prompt;
  				trials[i].data = (typeof params.data === 'undefined') ? {} : params.data[i];
  				trials[i].is_html = (typeof params.is_html === 'undefined') ? true : params.is_html;
