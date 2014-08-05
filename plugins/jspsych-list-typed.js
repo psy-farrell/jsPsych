@@ -74,8 +74,7 @@
                 } else {
                     trials[i].prompt = params.prompt;
                 }
-
- 				trials[i].prompt = (typeof params.prompt === 'undefined') ? "" : params.prompt;
+                
  				trials[i].data = (typeof params.data === 'undefined') ? {} : params.data[i];
  				trials[i].is_html = (typeof params.is_html === 'undefined') ? true : params.is_html;
  				trials[i].timing_post_trial = (typeof params.timing_post_trial === 'undefined') ? 0 : params.timing_post_trial;
