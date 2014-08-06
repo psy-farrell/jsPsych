@@ -80,7 +80,7 @@
  				trials[i].timing_post_trial = (typeof params.timing_post_trial === 'undefined') ? 0 : params.timing_post_trial;
 
  				trials[i].nResponses = (typeof params.nResponses === 'undefined') ? trials[i].stims.length : params.nResponses;
- 				trials[i].timeLimit = (typeof params.timeLimit === 'undefined') ? 60000 : params.time_limit;
+ 				trials[i].timeLimit = (typeof params.time_limit === 'undefined') ? 60000 : params.time_limit;
  				trials[i].terminate_key = (typeof params.terminate_key === 'undefined') ? 0 : params.terminate_key;
                 trials[i].fix_time = (typeof params.n_responses === 'undefined') ? [500, 500] : params.fix_time;
  			}
